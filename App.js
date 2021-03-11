@@ -1,21 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { decode, encode } from 'base-64';
+import AppLoading from 'expo-app-loading';
+import React, { useEffect, useState } from 'react';
+import { LogBox, Platform } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { Theme } from './app/components';
+import { firebase } from './app/firebase';
+import useLoadAssets from './app/hooks/useLoadAssets';
+import AuthNavigator from './app/navigation/AuthNavigator';
+
+if (!global.btoa) {
+  global.btoa = encode;
+}
+if (!global.atob) {
+  global.atob = decode;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+if (Platform.OS === 'android') {
+  LogBox.ignoreLogs(['']); //android登錄時會有長時間計時器的黃色警告
+}
+
+export default function App() {
+  const { assetsLoaded, setAssetsLoaded, loadAssetsAsync } = useLoadAssets();
+  const [user, setUser] = useState();
+  const [initializing, setInitalizing] = useState(true);
+
+  // const onAuthStateChanged = (user) => {
+  //   if (user) {
+  //     setUser(user);
+  //     setInitalizing(false);
+  //   } else {
+  //     setInitalizing(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged(onAuthStateChanged);
+  // }, []);
+
+  if (!assetsLoaded || initializing) {
+    return (
+      <AppLoading
+        startAsync={loadAssetsAsync}
+        onFinish={() => setAssetsLoaded(true)}
+        onError={console.warn}
+      />
+    );
+  }
+
+  return (
+    <Theme>
+      <NavigationContainer>
+        <AuthNavigator />
+      </NavigationContainer>
+    </Theme>
+  );
+}

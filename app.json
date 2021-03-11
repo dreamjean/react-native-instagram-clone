@@ -4,9 +4,9 @@
     "slug": "instagram",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,17 +16,29 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "extra": {
+      "firebase": {
+        "apiKey": "AIzaSyBvePSgXpG-U7xiQaGHm1kELtzhBBA0HqA",
+        "authDomain": "instagram-ccd64.firebaseapp.com",
+        "databaseURL": "https://instagram-ccd64.firebaseio.com",
+        "projectId": "instagram-ccd64",
+        "storageBucket": "instagram-ccd64.appspot.com",
+        "messagingSenderId": "169771230242",
+        "appId": "1:169771230242:web:221edb6b94a2cd9255167b"
+      }
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/favicon.png"
     }
   }
 }
