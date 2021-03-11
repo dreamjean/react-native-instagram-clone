@@ -1,15 +1,17 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const insLogoStyle = css`
   width: 60%;
+  height: 40px;
 `;
 
 const fbLogoStyle = css`
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
 
   ${({ theme: { space } }) => ({
-    marginRight: space.s2,
+    resizeMode: "contain",
+    marginRight: space.s3,
   })}
 `;
 

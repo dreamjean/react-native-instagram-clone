@@ -1,11 +1,11 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React from 'react';
-import { Pressable } from 'react-native';
-import styled from 'styled-components';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { Pressable } from "react-native";
+import styled from "styled-components";
 
 const Icon = ({
   backgroundColor,
-  color = 'white',
+  color = "white",
   name,
   IconComponent = MaterialCommunityIcons,
   iconRatio = 0.7,

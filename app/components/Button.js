@@ -1,9 +1,9 @@
-import React from 'react';
-import { RectButton } from 'react-native-gesture-handler';
-import styled from 'styled-components';
+import React from "react";
+import { RectButton } from "react-native-gesture-handler";
+import styled from "styled-components";
 
-import { calender, colors } from '../config';
-import { Text } from '../styles';
+import { calender, colors } from "../config";
+import { Text } from "../styles";
 
 const { ROW_HEIGHT } = calender;
 
@@ -43,7 +43,7 @@ const Touchable = styled(RectButton)`
 
 const Loading = styled.ActivityIndicator.attrs(({ theme: { colors } }) => ({
   color: colors.white,
-  size: 'small',
+  size: "small",
 }));
 
 export default Button;

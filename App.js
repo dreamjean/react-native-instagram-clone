@@ -1,13 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { decode, encode } from 'base-64';
-import AppLoading from 'expo-app-loading';
-import React, { useEffect, useState } from 'react';
-import { LogBox, Platform } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { decode, encode } from "base-64";
+import AppLoading from "expo-app-loading";
+import React from "react";
+import { LogBox, Platform } from "react-native";
 
-import { Theme } from './app/components';
-import { firebase } from './app/firebase';
-import useLoadAssets from './app/hooks/useLoadAssets';
-import AuthNavigator from './app/navigation/AuthNavigator';
+import { Theme } from "./app/components";
+// import { firebase } from "./app/firebase";
+import useLoadAssets from "./app/hooks/useLoadAssets";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -16,14 +16,14 @@ if (!global.atob) {
   global.atob = decode;
 }
 
-if (Platform.OS === 'android') {
-  LogBox.ignoreLogs(['']); //android登錄時會有長時間計時器的黃色警告
+if (Platform.OS === "android") {
+  LogBox.ignoreLogs([""]); //android登錄時會有長時間計時器的黃色警告
 }
 
 export default function App() {
   const { assetsLoaded, setAssetsLoaded, loadAssetsAsync } = useLoadAssets();
-  const [user, setUser] = useState();
-  const [initializing, setInitalizing] = useState(true);
+  // const [user, setUser] = useState();
+  // const [initializing, setInitalizing] = useState(true);
 
   // const onAuthStateChanged = (user) => {
   //   if (user) {
@@ -38,7 +38,7 @@ export default function App() {
   //   firebase.auth().onAuthStateChanged(onAuthStateChanged);
   // }, []);
 
-  if (!assetsLoaded || initializing) {
+  if (!assetsLoaded) {
     return (
       <AppLoading
         startAsync={loadAssetsAsync}

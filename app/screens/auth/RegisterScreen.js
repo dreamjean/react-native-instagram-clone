@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { Keyboard } from 'react-native';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Keyboard } from "react-native";
+import * as Yup from "yup";
 
-import { Container } from '../../components';
-import { ErrorMessage, Form, FormField, SubmitButton } from '../../components/form';
-import { db, firebase } from '../../firebase';
+import { Container } from "../../components";
+import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import { db, firebase } from "../../firebase";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required().max(50).label('Username'),
-  email: Yup.string().required().email().label('Email'),
+  username: Yup.string().required().max(50).label("Username"),
+  email: Yup.string().required().email().label("Email"),
   password: Yup.string()
     .required()
     .min(6)
     .max(50)
-    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
-    .matches(/\d/, 'Password must have a number')
-    .label('Password'),
+    .matches(/\w*[a-z]\w*/, "Password must have a small letter")
+    .matches(/\d/, "Password must have a number")
+    .label("Password"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords do not match')
+    .oneOf([Yup.ref("password")], "Passwords do not match")
     .required()
-    .label('Confirm Password'),
+    .label("Confirm Password"),
 });
 
 const RegisterScreen = ({ navigation }) => {
@@ -38,7 +38,7 @@ const RegisterScreen = ({ navigation }) => {
 
       const { uid } = firebase.auth().currentUser;
 
-      db.collection('users').doc(uid).set({
+      db.collection("users").doc(uid).set({
         username: userInfo.username,
         email: userInfo.email,
         avatar: null,
@@ -55,14 +55,14 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <Container
       caption="Already have an account? "
-      onNavigation={() => navigation.navigate('Login')}
+      onNavigation={() => navigation.navigate("Login")}
     >
       <Form
         initialValues={{
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
@@ -78,7 +78,7 @@ const RegisterScreen = ({ navigation }) => {
           keyboardAppearance="default"
           keyboardType="default"
           name="username"
-          onSubmitEditing={() => focusNextField('email')}
+          onSubmitEditing={() => focusNextField("email")}
           placeholder="Username"
           returnKeyLabel="next"
           returnKeyType="next"
@@ -94,8 +94,8 @@ const RegisterScreen = ({ navigation }) => {
           keyboardAppearance="default"
           keyboardType="email-address"
           name="email"
-          onSubmitEditing={() => focusNextField('password')}
-          onRef={(input) => (inputs['email'] = input)}
+          onSubmitEditing={() => focusNextField("password")}
+          onRef={(input) => (inputs["email"] = input)}
           placeholder="Email"
           returnKeyLabel="next"
           returnKeyType="next"
@@ -112,8 +112,8 @@ const RegisterScreen = ({ navigation }) => {
           keyboardType="default"
           maxLength={50}
           name="password"
-          onSubmitEditing={() => focusNextField('confirmPassword')}
-          onRef={(input) => (inputs['password'] = input)}
+          onSubmitEditing={() => focusNextField("confirmPassword")}
+          onRef={(input) => (inputs["password"] = input)}
           placeholder="Password"
           returnKeyLabel="next"
           returnKeyType="next"
@@ -131,7 +131,7 @@ const RegisterScreen = ({ navigation }) => {
           keyboardType="default"
           maxLength={50}
           name="confirmPassword"
-          onRef={(input) => (inputs['confirmPassword'] = input)}
+          onRef={(input) => (inputs["confirmPassword"] = input)}
           placeholder="Confirm Password"
           returnKeyLabel="go"
           returnKeyType="go"

@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const button1Style = css`
   ${({ color, blue, theme: { colors, fonts, size } }) => ({
     fontSize: size.s2,
     fontFamily: fonts[0],
     color: color ? color : blue ? colors.blue : colors.white,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   })}
 `;
 
@@ -18,10 +18,9 @@ const button2Style = css`
 `;
 
 const bodyStyle = css`
-  ${({ theme: { colors, fonts, size } }) => ({
+  ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[0],
     fontSize: size.m1,
-    color: colors.dark,
   })}
 `;
 
@@ -37,7 +36,7 @@ const dangerStyle = css`
 const Text = styled.Text`
   ${({ center, color, marginTop, margin, opacity, right, white, theme: { colors } }) => ({
     color: color ? color : white ? colors.white : colors.dark,
-    textAlign: center ? 'center' : right ? 'right' : 'left',
+    textAlign: center ? "center" : right ? "right" : "left",
     margin,
     marginTop,
     opacity,

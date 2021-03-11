@@ -1,9 +1,9 @@
-import { FontAwesome5 } from '@expo/vector-icons';
-import React, { forwardRef } from 'react';
-import { Pressable } from 'react-native';
-import styled from 'styled-components';
+import { FontAwesome5 } from "@expo/vector-icons";
+import React, { forwardRef } from "react";
+import { Pressable } from "react-native";
+import styled from "styled-components";
 
-import { calender, colors } from '../config';
+import { calender, colors } from "../config";
 
 const { ROW_HEIGHT } = calender;
 

@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Keyboard } from 'react-native';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Keyboard } from "react-native";
+import * as Yup from "yup";
 
-import { Container } from '../../components';
-import { ErrorMessage, Form, FormField, SubmitButton } from '../../components/form';
-import { firebase } from '../../firebase';
+import { Container, TextLinking } from "../../components";
+import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import { firebase } from "../../firebase";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label('Email'),
+  email: Yup.string().required().email().label("Email"),
   password: Yup.string()
     .required()
     .min(6)
     .max(50)
-    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
-    .matches(/\d/, 'Password must have a number')
-    .label('Password'),
+    .matches(/\w*[a-z]\w*/, "Password must have a small letter")
+    .matches(/\d/, "Password must have a number")
+    .label("Password"),
 });
 
 const LoginScreen = ({ navigation }) => {
@@ -38,10 +38,10 @@ const LoginScreen = ({ navigation }) => {
     <Container
       caption="Don't have an account? "
       linkTitle="Sign Up"
-      onNavigation={() => navigation.navigate('Register')}
+      onNavigation={() => navigation.navigate("Register")}
     >
       <Form
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
           keyboardAppearance="default"
           keyboardType="email-address"
           name="email"
-          onSubmitEditing={() => focusNextField('password')}
+          onSubmitEditing={() => focusNextField("password")}
           placeholder="Email"
           returnKeyLabel="next"
           returnKeyType="next"
@@ -73,12 +73,17 @@ const LoginScreen = ({ navigation }) => {
           keyboardType="default"
           maxLength={50}
           name="password"
-          onRef={(input) => (inputs['password'] = input)}
+          onRef={(input) => (inputs["password"] = input)}
           placeholder="Password"
           returnKeyLabel="go"
           returnKeyType="go"
           secureTextEntry
           textContentType="password"
+        />
+        <TextLinking
+          title="Forgot password"
+          style={{ alignSelf: "flex-end", marginVertical: 16 }}
+          onPress={() => true}
         />
         <SubmitButton title="Login" />
       </Form>

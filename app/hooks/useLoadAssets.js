@@ -26,7 +26,7 @@ const useLoadAssets = () => {
 
   useEffect(() => {
     loadAssetsAsync();
-  });
+  }, [assetsLoaded]);
 
   return { assetsLoaded, setAssetsLoaded, loadAssetsAsync };
 };
