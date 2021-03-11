@@ -24,14 +24,14 @@ const validationSchema = Yup.object().shape({
 
 const RegisterScreen = ({ navigation }) => {
   const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [inputs] = useState([]);
 
   const focusNextField = (nextField) => inputs[nextField].focus();
 
   const handleSubmit = async (userInfo) => {
     Keyboard.dismiss();
-    setLoading(true);
+    // setLoading(true);
 
     try {
       await firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password);
@@ -47,7 +47,7 @@ const RegisterScreen = ({ navigation }) => {
       setError(error.message);
     }
 
-    setLoading(false);
+    // setLoading(false);
   };
 
   // if (loading) return <ActivityIndicator />;
