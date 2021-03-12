@@ -3,17 +3,16 @@ import styled, { css } from "styled-components";
 const button1Style = css`
   ${({ color, blue, theme: { colors, fonts, size } }) => ({
     fontSize: size.s2,
-    fontFamily: fonts[0],
+    fontFamily: fonts[1],
     color: color ? color : blue ? colors.blue : colors.white,
-    textTransform: "capitalize",
   })}
 `;
 
 const button2Style = css`
-  ${({ theme: { colors, size, fonts } }) => ({
-    fontSize: size.s2,
-    fontFamily: fonts[0],
-    color: colors.blue2,
+  ${({ color, grey, theme: { colors, fonts, size } }) => ({
+    fontSize: size.s1,
+    fontFamily: fonts[1],
+    color: color ? color : grey ? colors.grey : colors.darkBlue,
   })}
 `;
 
@@ -26,10 +25,23 @@ const bodyStyle = css`
 
 const dangerStyle = css`
   ${({ theme: { colors, size, fonts, space } }) => ({
-    fontSize: size.s1,
+    fontSize: size.s2,
     fontFamily: fonts[0],
     color: colors.danger,
-    marginVertical: space.s2,
+    marginVertical: space.s1,
+  })}
+`;
+
+const small1Style = css`
+  ${({ theme: { fonts, size } }) => ({
+    fontFamily: fonts[0],
+    fontSize: size.s1,
+  })}
+`;
+const small2Style = css`
+  ${({ theme: { fonts, size } }) => ({
+    fontFamily: fonts[0],
+    fontSize: size.s2,
   })}
 `;
 
@@ -46,6 +58,8 @@ const Text = styled.Text`
   ${({ button2 }) => button2 && button2Style}
   ${({ body }) => body && bodyStyle}
   ${({ danger }) => danger && dangerStyle}
+  ${({ small1 }) => small1 && small1Style}
+  ${({ small2 }) => small2 && small2Style}
 `;
 
 export default Text;

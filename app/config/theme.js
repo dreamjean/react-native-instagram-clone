@@ -5,10 +5,10 @@ export default {
   size: {
     s1: 12,
     s2: 14,
-    m1: 17,
+    m1: 16,
     m2: 18,
   },
-  fonts: ["DexaPro-400-Regular", "DexaPro-500-Medium", "DexaPro-700-Bold"],
+  fonts: ["Montserrat-Regular", "Montserrat-SemiBold", "Montserrat-Bold"],
   space: {
     s1: 4,
     s2: 8,

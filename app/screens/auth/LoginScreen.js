@@ -1,10 +1,16 @@
+import { Fontisto } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Keyboard } from "react-native";
+import { Keyboard, Pressable } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import styled from "styled-components";
 import * as Yup from "yup";
 
-import { Container, TextLinking } from "../../components";
+import { Footer, TextButton } from "../../components";
 import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import { colors, images } from "../../config";
 import { firebase } from "../../firebase";
+import { Image } from "../../styles";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -19,6 +25,7 @@ const validationSchema = Yup.object().shape({
 
 const LoginScreen = ({ navigation }) => {
   const [error, setError] = useState();
+  const [secureText, setSecureText] = useState(true);
   const [inputs] = useState([]);
 
   const focusNextField = (nextField) => inputs[nextField].focus();
@@ -35,60 +42,117 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <Container
-      caption="Don't have an account? "
-      linkTitle="Sign Up"
-      onNavigation={() => navigation.navigate("Register")}
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      extraScrollHeight={100}
+      enableOnAndroid
+      enableAutomaticScroll
+      keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
     >
-      <Form
-        initialValues={{ email: "", password: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        <ErrorMessage error={error} visible={error} />
-        <FormField
-          allowFontScaling={false}
-          autoCapitalize="none"
-          autoCompleteType="email"
-          autoCorrect={false}
-          blurOnSubmit={false}
-          iconName="mail"
-          keyboardAppearance="default"
-          keyboardType="email-address"
-          name="email"
-          onSubmitEditing={() => focusNextField("password")}
-          placeholder="Email"
-          returnKeyLabel="next"
-          returnKeyType="next"
-          textContentType="emailAddress"
-        />
-        <FormField
-          allowFontScaling={false}
-          autoCapitalize="none"
-          autoCompleteType="password"
-          autoCorrect={false}
-          blurOnSubmit={false}
-          iconName="lock1"
-          keyboardAppearance="default"
-          keyboardType="default"
-          maxLength={50}
-          name="password"
-          onRef={(input) => (inputs["password"] = input)}
-          placeholder="Password"
-          returnKeyLabel="go"
-          returnKeyType="go"
-          secureTextEntry
-          textContentType="password"
-        />
-        <TextLinking
-          title="Forgot password"
-          style={{ alignSelf: "flex-end", marginVertical: 16 }}
+      <Container>
+        <Pressable
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.5 : 1,
+            position: "absolute",
+            top: 28,
+            left: 12,
+          })}
+          onPress={() => navigation.goBack()}
+        >
+          <Fontisto name="angle-left" size={18} color={colors.dark} />
+        </Pressable>
+        <Header>
+          <Image insLogo source={images[0]} />
+        </Header>
+        <FormWrapper>
+          <Form
+            initialValues={{ email: "", password: "" }}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+          >
+            <ErrorMessage error={error} visible={error} />
+            <FormField
+              allowFontScaling={false}
+              autoCapitalize="none"
+              autoCompleteType="email"
+              autoCorrect={false}
+              blurOnSubmit={false}
+              clearButtonMode="while-editing"
+              keyboardAppearance="default"
+              keyboardType="email-address"
+              name="email"
+              onSubmitEditing={() => focusNextField("password")}
+              placeholder="Email"
+              returnKeyLabel="next"
+              returnKeyType="next"
+              textContentType="emailAddress"
+            />
+            <FormField
+              allowFontScaling={false}
+              autoCapitalize="none"
+              autoCompleteType="password"
+              autoCorrect={false}
+              blurOnSubmit={false}
+              icon={secureText ? "eye-slash" : "eye"}
+              iconColor={secureText ? colors.grey : colors.blue}
+              keyboardAppearance="default"
+              keyboardType="default"
+              maxLength={50}
+              name="password"
+              onPress={() => setSecureText((prev) => !prev)}
+              onRef={(input) => (inputs["password"] = input)}
+              placeholder="Password"
+              returnKeyLabel="go"
+              returnKeyType="go"
+              secureTextEntry={secureText}
+              textContentType="password"
+            />
+            <SubmitButton title="Login" />
+          </Form>
+          <TextButton
+            caption="Forgot your login details? "
+            title="Get help logging in."
+            onPress={() => true}
+            margin={16}
+          />
+        </FormWrapper>
+        <Footer
+          caption="Don't have an account? "
+          title="Sign up."
+          logo="facebook"
+          label="Log in with facebook"
+          onNavigation={() => navigation.navigate("Register")}
           onPress={() => true}
         />
-        <SubmitButton title="Login" />
-      </Form>
-    </Container>
+      </Container>
+      <StatusBar style="dark" />
+    </KeyboardAwareScrollView>
   );
 };
+
+const Container = styled.View`
+  flex: 1;
+
+  ${({ theme: { colors, space } }) => ({
+    backgroundColor: colors.white,
+    paddingTop: space.l2,
+  })}
+`;
+
+const Header = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const FormWrapper = styled.View`
+  width: 100%;
+  justify-content: flex-end;
+
+  ${({ theme: { space } }) => ({
+    padding: space.m1,
+  })}
+`;
 
 export default LoginScreen;

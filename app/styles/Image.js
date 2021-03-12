@@ -2,7 +2,9 @@ import styled, { css } from "styled-components";
 
 const insLogoStyle = css`
   width: 60%;
-  height: 40px;
+  height: 70px;
+
+  ${{ resizeMode: "contain" }}
 `;
 
 const fbLogoStyle = css`

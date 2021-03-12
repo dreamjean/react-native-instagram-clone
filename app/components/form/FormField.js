@@ -23,7 +23,6 @@ const FormField = ({ name, onSubmitEditing, onRef, ...rest }) => {
         onChangeText={(text) => setFieldValue(name, text)}
         onSubmitEditing={onSubmitEditing ? onSubmitEditing : handleSubmit}
         ref={onRef}
-        touched={touched[name]}
         {...rest}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />

@@ -2,7 +2,7 @@ import { Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-const ROW_HEIGHT = height / 15;
+const ROW_HEIGHT = height / 16;
 
 export default {
   width,
