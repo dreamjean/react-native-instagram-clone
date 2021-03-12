@@ -1,9 +1,16 @@
 import styled, { css } from "styled-components";
 
-const circleStyle = css``;
+const containerStyle = css`
+  flex: 1;
+
+  ${({ padding, theme: { colors } }) => ({
+    backgroundColor: colors.white,
+    padding,
+  })}
+`;
 
 const View = styled.View`
-  ${({ circle }) => circle && circleStyle}
+  ${({ container }) => container && containerStyle}
 `;
 
 export default View;

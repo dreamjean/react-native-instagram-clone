@@ -7,6 +7,8 @@ export default {
     s2: 14,
     m1: 16,
     m2: 18,
+    l1: 26,
+    l2: 28,
   },
   fonts: ["Montserrat-Regular", "Montserrat-SemiBold", "Montserrat-Bold"],
   space: {

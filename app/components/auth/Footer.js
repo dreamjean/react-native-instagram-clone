@@ -7,7 +7,7 @@ import { Text } from "../../styles";
 import Button from "../Button";
 import TextButton from "./TextButton";
 
-const Footer = ({ logo, label, caption, title, onPress, onNavigation }) => {
+const Footer = ({ logo, label, caption, color, title, onPress, onNavigation }) => {
   return (
     <>
       <SplitLine>
@@ -18,7 +18,7 @@ const Footer = ({ logo, label, caption, title, onPress, onNavigation }) => {
         </Box>
         <Button bgColor="transparent" color={colors.blue} title={label} {...{ logo, onPress }} />
       </SplitLine>
-      <TextButton {...{ caption, title }} onPress={onNavigation} />
+      <TextButton {...{ caption, title, color }} onPress={onNavigation} />
     </>
   );
 };

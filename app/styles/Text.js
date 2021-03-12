@@ -32,6 +32,22 @@ const dangerStyle = css`
   })}
 `;
 
+const heading1Style = css`
+  ${({ theme: { fonts, size, colors } }) => ({
+    fontFamily: fonts[2],
+    fontSize: size.l1,
+    color: colors.dark,
+  })}
+`;
+
+const heading2Style = css`
+  ${({ theme: { fonts, size, colors } }) => ({
+    fontFamily: fonts[0],
+    fontSize: size.l1,
+    color: colors.dark,
+  })}
+`;
+
 const small1Style = css`
   ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[0],
@@ -58,6 +74,8 @@ const Text = styled.Text`
   ${({ button2 }) => button2 && button2Style}
   ${({ body }) => body && bodyStyle}
   ${({ danger }) => danger && dangerStyle}
+  ${({ heading1 }) => heading1 && heading1Style}
+  ${({ heading2 }) => heading2 && heading2Style}
   ${({ small1 }) => small1 && small1Style}
   ${({ small2 }) => small2 && small2Style}
 `;

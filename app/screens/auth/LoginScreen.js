@@ -113,14 +113,14 @@ const LoginScreen = ({ navigation }) => {
           <TextButton
             caption="Forgot your login details? "
             title="Get help logging in."
-            onPress={() => true}
+            onPress={() => navigation.navigate("ForgotPassword")}
             margin={16}
           />
         </FormWrapper>
         <Footer
           caption="Don't have an account? "
           title="Sign up."
-          logo="facebook"
+          logo
           label="Log in with facebook"
           onNavigation={() => navigation.navigate("Register")}
           onPress={() => true}

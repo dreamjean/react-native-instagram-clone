@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Text } from "../../styles";
 
-const TextButton = ({ caption, title, onPress, margin }) => {
+const TextButton = ({ caption, color, title, onPress, margin }) => {
   return (
     <Wrapper {...{ margin }}>
       <Text button2 grey>
@@ -16,7 +16,9 @@ const TextButton = ({ caption, title, onPress, margin }) => {
         })}
         {...{ onPress }}
       >
-        <Text button2>{title}</Text>
+        <Text button2 {...{ color }}>
+          {title}
+        </Text>
       </Pressable>
     </Wrapper>
   );

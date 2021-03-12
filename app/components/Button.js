@@ -12,7 +12,7 @@ const Button = ({
   bgColor = colors.blue,
   color = colors.white,
   loading = false,
-  logo,
+  logo = false,
   marginTop = 12,
   onPress,
   title,
@@ -21,7 +21,12 @@ const Button = ({
   return (
     <Touchable {...{ bgColor, width, marginTop, onPress }} disable={loading}>
       {logo && (
-        <MaterialCommunityIcons style={{ marginRight: 8 }} name={logo} size={26} color={color} />
+        <MaterialCommunityIcons
+          style={{ marginRight: 8 }}
+          name="facebook"
+          size={24}
+          color={color}
+        />
       )}
       {loading ? (
         <Loading />

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Keyboard } from "react-native";
+import styled from "styled-components";
 import * as Yup from "yup";
 
-import { Container } from "../../components";
 import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
 import { db, firebase } from "../../firebase";
 
@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
     .label("Confirm Password"),
 });
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = () => {
   const [error, setError] = useState();
   // const [loading, setLoading] = useState(false);
   const [inputs] = useState([]);
@@ -53,10 +53,7 @@ const RegisterScreen = ({ navigation }) => {
   // if (loading) return <ActivityIndicator />;
 
   return (
-    <Container
-      caption="Already have an account? "
-      onNavigation={() => navigation.navigate("Login")}
-    >
+    <Container>
       <Form
         initialValues={{
           username: "",
@@ -143,5 +140,9 @@ const RegisterScreen = ({ navigation }) => {
     </Container>
   );
 };
+
+const Container = styled.View`
+  flex: 1;
+`;
 
 export default RegisterScreen;
