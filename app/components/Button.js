@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import React from "react";
 import { RectButton } from "react-native-gesture-handler";
 import styled from "styled-components";
@@ -20,14 +20,7 @@ const Button = ({
 }) => {
   return (
     <Touchable {...{ bgColor, width, marginTop, onPress }} disable={loading}>
-      {logo && (
-        <MaterialCommunityIcons
-          style={{ marginRight: 8 }}
-          name="facebook"
-          size={24}
-          color={color}
-        />
-      )}
+      {logo && <Entypo style={{ marginRight: 8 }} name="facebook" size={24} color={color} />}
       {loading ? (
         <Loading />
       ) : (

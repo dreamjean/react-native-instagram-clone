@@ -10,7 +10,12 @@ const SplashScreen = ({ navigation }) => {
     <Container>
       <Header>
         <Image insLogo source={images[0]} />
-        <Button logo="facebook" title="Log in with Facebook" marginTop={40} onPress={() => true} />
+        <Button
+          logo="facebook"
+          title="Continue with Facebook"
+          marginTop={40}
+          onPress={() => true}
+        />
       </Header>
       <Footer
         caption="Already have an account? "

@@ -1,42 +1,68 @@
+import { Feather } from "@expo/vector-icons";
 import React from "react";
 import styled from "styled-components";
 
-import { Footer } from "../../components";
+import { Button, Footer } from "../../components";
+import PhoneInput from "../../components/PhoneInput";
 import { colors } from "../../config";
 import { Text, View } from "../../styles";
 
 const ForgotPasswordScreen = ({ navigation }) => {
   return (
     <View container padding={20}>
-      <Text heading1 marginTop={20}>
-        Login Help
-      </Text>
-      <Wrapper>
-        <Text heading2 marginTop={16}>
-          Fing Your Account
+      <Header>
+        <IconBox>
+          <Feather name="lock" size={40} color={colors.dark} />
+        </IconBox>
+        <Text title1 marginTop={16}>
+          Trouble logging in?
         </Text>
         <Text button1 color={colors.grey} center marginTop={12}>
           Enter your username or the email or phone number linked to your account.
         </Text>
-      </Wrapper>
+        <PhoneInput />
+        <Button title="Send Login Link" onPress={() => true} />
+        <Button
+          bgColor="transparent"
+          color={colors.blue}
+          marginTop={0}
+          title="Need more help?"
+          onPress={() => true}
+        />
+      </Header>
       <Footer
-        title="Need more help?"
+        title="Back To Login"
         color={colors.blue}
         logo
-        label="Log in with facebook"
-        onNavigation={() => navigation.navigate("Register")}
+        label="Continue with Facebook"
+        onNavigation={() => navigation.navigate("Login")}
         onPress={() => true}
       />
     </View>
   );
 };
 
-const Wrapper = styled.View`
-  justify-content: center;
+const Header = styled.View`
+  flex-grow: 1;
+  justify-content: flex-end;
   align-items: center;
 
   ${({ theme: { space } }) => ({
-    padding: space.m1,
+    paddingVertical: space.m1,
+  })}
+`;
+
+const IconBox = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border-width: 3px;
+
+  ${({ theme: { colors, space } }) => ({
+    borderColor: colors.dark,
+    marginTop: space.l2,
   })}
 `;
 

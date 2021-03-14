@@ -121,7 +121,7 @@ const LoginScreen = ({ navigation }) => {
           caption="Don't have an account? "
           title="Sign up."
           logo
-          label="Log in with facebook"
+          label="Continue with Facebook"
           onNavigation={() => navigation.navigate("Register")}
           onPress={() => true}
         />
