@@ -48,13 +48,15 @@ const PhoneInput = forwardRef(({ error, ...rest }, ref) => {
           {...{ ref }}
           {...rest}
           blurOnSubmit={false}
+          clearButtonMode="while-editing"
           keyboardAppearance="default"
           keyboardType="number-pad"
           numberOfLines={1}
           returnKeyLabel="go"
           returnKeyType="go"
           selectionColor={colors.blue}
-          placeholder="Phone"
+          style={{ paddingLeft: 12 }}
+          placeholder="Phone Number"
           placeholderTextcolor={colors.grey}
           underlineColorAndroid="transparent"
         />

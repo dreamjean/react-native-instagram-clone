@@ -3,25 +3,13 @@ import { Keyboard } from "react-native";
 import styled from "styled-components";
 import * as Yup from "yup";
 
+import { AuthContainer } from "../../components";
 import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
-import FormPreferredContact from "../../components/form/FormPreferredContact";
 import { db, firebase } from "../../firebase";
+import { Text } from "../../styles";
 
 const validationSchema = Yup.object().shape({
-  showPhone: Yup.boolean(),
-  phone: Yup.string().when("showPhone", {
-    is: true,
-    then: Yup.string().min(6).required("Phone number is required.").label("Phone"),
-  }),
-  email: Yup.string()
-    .email()
-    .when("showPhone", {
-      is: false,
-      then: Yup.string()
-        .email("Please use a valid email address.")
-        .required("Email address is required.")
-        .label("Email"),
-    }),
+  username: Yup.string().required().label("Username"),
   password: Yup.string()
     .required()
     .min(6)
@@ -35,7 +23,7 @@ const validationSchema = Yup.object().shape({
     .label("Confirm Password"),
 });
 
-const RegisterScreen = () => {
+const Register2Screen = () => {
   const [error, setError] = useState();
   // const [loading, setLoading] = useState(false);
   const [inputs] = useState([]);
@@ -66,12 +54,15 @@ const RegisterScreen = () => {
   // if (loading) return <ActivityIndicator />;
 
   return (
-    <Container>
+    <AuthContainer>
+      <Header>
+        <Text title>Enter Confirmation Code</Text>
+        <Text body>Enter the confirmation code we sent to email.</Text>
+        <Text>Resend Code.</Text>
+      </Header>
       <Form
         initialValues={{
-          showPhone: true,
           username: "",
-          email: "",
           password: "",
           confirmPassword: "",
         }}
@@ -79,7 +70,6 @@ const RegisterScreen = () => {
         validationSchema={validationSchema}
       >
         <ErrorMessage error={error} visible={error} />
-        <FormPreferredContact name="showPhone" />
         <FormField
           allowFontScaling={false}
           autoCapitalize="none"
@@ -90,7 +80,7 @@ const RegisterScreen = () => {
           keyboardAppearance="default"
           keyboardType="default"
           name="username"
-          onSubmitEditing={() => focusNextField("email")}
+          onSubmitEditing={() => focusNextField("password")}
           placeholder="Username"
           returnKeyLabel="next"
           returnKeyType="next"
@@ -133,14 +123,18 @@ const RegisterScreen = () => {
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton title="Register" />
+        <SubmitButton title="Next" />
       </Form>
-    </Container>
+    </AuthContainer>
   );
 };
 
-const Container = styled.View`
-  flex: 1;
+const Header = styled.View`
+  align-items: center;
+
+  ${({ theme: { space } }) => ({
+    paddingTop: space.l2,
+  })}
 `;
 
-export default RegisterScreen;
+export default Register2Screen;

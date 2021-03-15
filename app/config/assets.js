@@ -1,6 +1,6 @@
 export const images = [
   require("../assets/images/instagram_logo.png"),
-  require("../assets/images/facebook_logo.png"),
+  require("../assets/images/account.png"),
 ];
 
 export const fonts = {

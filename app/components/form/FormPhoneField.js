@@ -6,12 +6,12 @@ import ErrorMessage from "./ErrorMessage";
 
 const FormPhoneField = ({ name, onRef, ...rest }) => {
   const {
-    handleSubmit,
     setFieldValue,
     setFieldTouched,
     values,
     errors,
     touched,
+    handleSubmit,
   } = useFormikContext();
 
   return (

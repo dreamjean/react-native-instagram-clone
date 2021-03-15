@@ -2,18 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 import { Button, Footer } from "../../components";
-import { images } from "../../config";
-import { Image } from "../../styles";
+import { colors, images } from "../../config";
+import { Image, Text } from "../../styles";
 
 const SplashScreen = ({ navigation }) => {
   return (
     <Container>
       <Header>
         <Image insLogo source={images[0]} />
+        <Text body color={colors.grey} center marginTop={20}>
+          Sign up to see photos and videos from your friends.
+        </Text>
         <Button
           logo="facebook"
           title="Continue with Facebook"
-          marginTop={40}
+          marginTop={20}
           onPress={() => true}
         />
       </Header>
@@ -22,7 +25,7 @@ const SplashScreen = ({ navigation }) => {
         title="Log in"
         label="Sign up with email or phone number"
         onNavigation={() => navigation.navigate("Login")}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("Register1")}
       />
     </Container>
   );

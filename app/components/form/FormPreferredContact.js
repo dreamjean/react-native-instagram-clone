@@ -5,7 +5,7 @@ import PreferredContact from "../auth/PreferredContact";
 
 const tabs = [{ label: "Phone" }, { label: "Email" }];
 
-const FormPreferredContact = ({ name }) => {
+const FormPreferredContact = ({ name, onNextPage }) => {
   const { setFieldValue, values } = useFormikContext();
 
   return (
@@ -13,6 +13,7 @@ const FormPreferredContact = ({ name }) => {
       tabs={tabs}
       onPress={() => setFieldValue(name, !values[name])}
       showPhone={values[name]}
+      {...{ onNextPage }}
     />
   );
 };

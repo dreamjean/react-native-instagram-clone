@@ -1,3 +1,4 @@
+export { default as AuthContainer } from "./auth/AuthContainer";
 export { default as Footer } from "./auth/Footer";
 export { default as TextButton } from "./auth/TextButton";
 export { default as Button } from "./Button";

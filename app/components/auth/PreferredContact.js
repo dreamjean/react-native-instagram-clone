@@ -10,10 +10,9 @@ import Animated, {
 } from "react-native-reanimated";
 import styled from "styled-components";
 
-import { calender, theme } from "../../config";
-import { Text } from "../../styles";
-import FormField from "../form/FormField";
-import FormPhoneField from "../form/FormPhoneFlield";
+import { calender, images, theme } from "../../config";
+import { Image, Text } from "../../styles";
+import { FormField, FormPhoneField, SubmitButton } from "../form";
 
 const { width, TAB_WIDTH } = calender;
 const { colors, space } = theme;
@@ -26,7 +25,8 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
   });
 
   return (
-    <>
+    <Container>
+      <Image account source={images[1]} />
       <Tabs>
         {tabs.map((tab, index) => {
           const position = TAB_WIDTH * index + TAB_WIDTH / 2;
@@ -71,13 +71,22 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
                   activeIndex.value = index;
                 }}
               >
-                <Text title1>{tab.label}</Text>
+                <Text title1 style={{ textTransform: "uppercase" }}>
+                  {tab.label}
+                </Text>
               </Pressable>
             </Animated.View>
           );
         })}
       </Tabs>
-      {showPhone && <FormPhoneField name="phone" />}
+      {showPhone && (
+        <>
+          <FormPhoneField name="phone" />
+          <Text small2 center color={colors.grey} marginTop={12}>
+            You may receive SMS updates from Instagram and can optout at any time.
+          </Text>
+        </>
+      )}
       {!showPhone && (
         <FormField
           allowFontScaling={false}
@@ -85,23 +94,31 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
           autoCompleteType="email"
           autoCorrect={false}
           blurOnSubmit={false}
+          clearButtonMode="while-editing"
           keyboardAppearance="default"
           keyboardType="email-address"
           name="email"
-          placeholder="Email"
-          returnKeyLabel="next"
-          returnKeyType="next"
+          placeholder="Email Address"
+          returnKeyLabel="go"
+          returnKeyType="go"
           textContentType="emailAddress"
         />
       )}
-    </>
+      <SubmitButton title="Next" />
+    </Container>
   );
 };
+
+const Container = styled.View`
+  ${({ theme: { space } }) => ({
+    padding: space.m1,
+    marginTop: space.l2,
+  })}
+`;
 
 const Tabs = styled.View`
   flex-direction: row;
   align-items: center;
-  width: 100%;
 
   ${({ theme: { colors, space } }) => ({
     margin: space.m1,

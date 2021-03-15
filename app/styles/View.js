@@ -6,10 +6,11 @@ const { ROW_HEIGHT } = calender;
 
 const containerStyle = css`
   flex: 1;
+  ${"" /* justify-content: center; */}
 
-  ${({ padding, theme: { colors } }) => ({
+  ${({ theme: { colors, space } }) => ({
     backgroundColor: colors.white,
-    padding,
+    paddingHorizontal: space.m1,
   })}
 `;
 
