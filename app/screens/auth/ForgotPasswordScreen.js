@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { Button, Footer } from "../../components";
-import PhoneInput from "../../components/PhoneInput";
 import { colors } from "../../config";
 import { Text, View } from "../../styles";
 
@@ -20,7 +19,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         <Text button1 color={colors.grey} center marginTop={12}>
           Enter your username or the email or phone number linked to your account.
         </Text>
-        <PhoneInput />
+
         <Button title="Send Login Link" onPress={() => true} />
         <Button
           bgColor="transparent"

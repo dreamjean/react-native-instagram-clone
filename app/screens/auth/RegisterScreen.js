@@ -4,11 +4,24 @@ import styled from "styled-components";
 import * as Yup from "yup";
 
 import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import FormPreferredContact from "../../components/form/FormPreferredContact";
 import { db, firebase } from "../../firebase";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required().max(50).label("Username"),
-  email: Yup.string().required().email().label("Email"),
+  showPhone: Yup.boolean(),
+  phone: Yup.string().when("showPhone", {
+    is: true,
+    then: Yup.string().min(6).required("Phone number is required.").label("Phone"),
+  }),
+  email: Yup.string()
+    .email()
+    .when("showPhone", {
+      is: false,
+      then: Yup.string()
+        .email("Please use a valid email address.")
+        .required("Email address is required.")
+        .label("Email"),
+    }),
   password: Yup.string()
     .required()
     .min(6)
@@ -56,6 +69,7 @@ const RegisterScreen = () => {
     <Container>
       <Form
         initialValues={{
+          showPhone: true,
           username: "",
           email: "",
           password: "",
@@ -65,6 +79,7 @@ const RegisterScreen = () => {
         validationSchema={validationSchema}
       >
         <ErrorMessage error={error} visible={error} />
+        <FormPreferredContact name="showPhone" />
         <FormField
           allowFontScaling={false}
           autoCapitalize="none"
@@ -80,23 +95,6 @@ const RegisterScreen = () => {
           returnKeyLabel="next"
           returnKeyType="next"
           textContentType="username"
-        />
-        <FormField
-          allowFontScaling={false}
-          autoCapitalize="none"
-          autoCompleteType="email"
-          autoCorrect={false}
-          blurOnSubmit={false}
-          iconName="mail"
-          keyboardAppearance="default"
-          keyboardType="email-address"
-          name="email"
-          onSubmitEditing={() => focusNextField("password")}
-          onRef={(input) => (inputs["email"] = input)}
-          placeholder="Email"
-          returnKeyLabel="next"
-          returnKeyType="next"
-          textContentType="emailAddress"
         />
         <FormField
           allowFontScaling={false}

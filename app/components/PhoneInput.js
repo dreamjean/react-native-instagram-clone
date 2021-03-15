@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Pressable } from "react-native";
 import CountryPicker, {
   CountryModalProvider,
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { colors } from "../config";
 import { Input, Text, View } from "../styles";
 
-const PhoneInput = ({ error, ...rest }) => {
+const PhoneInput = forwardRef(({ error, ...rest }, ref) => {
   const [countryCode, setCountryCode] = useState("TW");
   const [code, setCode] = useState("886");
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,31 +36,32 @@ const PhoneInput = ({ error, ...rest }) => {
             withEmoji
             withFilter
             withFlag
-            // filterProps={filterProps}
             countryCode={countryCode}
             withCallingCode
-            // disableNativeModal={disabled}
             visible={modalVisible}
             theme={DEFAULT_THEME}
             renderFlagButton={renderFlagButton}
             onClose={() => setModalVisible(false)}
-            // {...countryPickerProps}
           />
         </Pressable>
         <Input
+          {...{ ref }}
           {...rest}
+          blurOnSubmit={false}
           keyboardAppearance="default"
           keyboardType="number-pad"
           numberOfLines={1}
+          returnKeyLabel="go"
+          returnKeyType="go"
           selectionColor={colors.blue}
-          placeholder="Phone Number"
+          placeholder="Phone"
           placeholderTextcolor={colors.grey}
           underlineColorAndroid="transparent"
         />
       </View>
     </CountryModalProvider>
   );
-};
+});
 
 const AreaNum = styled.View`
   align-items: center;
