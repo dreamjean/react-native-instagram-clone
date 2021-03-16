@@ -1,42 +1,35 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable } from "react-native";
 import styled from "styled-components";
 
 const Icon = ({
   backgroundColor,
+  borderColor,
   color = "white",
-  name,
-  IconComponent = MaterialCommunityIcons,
+  round = true,
   iconRatio = 0.7,
-  margin,
-  onPress,
+  iconName,
+  IconComponent = MaterialCommunityIcons,
   size,
 }) => {
   return (
-    <Pressable
-      style={({ pressed }) => ({
-        opacity: pressed ? 0.5 : 1,
-      })}
-      {...{ onPress }}
-    >
-      <Container {...{ size, backgroundColor, margin }}>
-        <IconComponent name={name} color={color} size={size * iconRatio} />
-      </Container>
-    </Pressable>
+    <Box {...{ backgroundColor, borderColor, round, size }}>
+      <IconComponent name={iconName} size={iconRatio * size} color={color} />
+    </Box>
   );
 };
 
-const Container = styled.View`
-  justify-content: center;
+const Box = styled.View`
   align-items: center;
+  justify-content: center;
 
-  ${({ size, backgroundColor, margin }) => ({
-    width: size,
-    height: size,
-    borderRadius: size / 2,
+  ${({ round, size, backgroundColor, borderColor, theme: { radii } }) => ({
     backgroundColor,
-    margin,
+    borderColor,
+    borderWidth: borderColor ? 1 : 0,
+    borderRadius: round ? size / 2 : radii.s1,
+    height: size,
+    width: size,
   })}
 `;
 

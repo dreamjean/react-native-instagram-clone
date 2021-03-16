@@ -27,6 +27,8 @@ const button2Style = css`
 `;
 
 const bodyStyle = css`
+  line-height: 25px;
+
   ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[0],
     fontSize: size.m1,
@@ -43,6 +45,8 @@ const dangerStyle = css`
 `;
 
 const small1Style = css`
+  line-height: 18px;
+
   ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[0],
     fontSize: size.s1,
@@ -50,6 +54,8 @@ const small1Style = css`
 `;
 
 const small2Style = css`
+  line-height: 20px;
+
   ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[0],
     fontSize: size.s2,
@@ -59,7 +65,7 @@ const small2Style = css`
 const title1Style = css`
   ${({ theme: { fonts, size } }) => ({
     fontFamily: fonts[1],
-    fontSize: size.m3,
+    fontSize: size.m2,
     color: colors.dark,
     textTransform: "capitalize",
   })}

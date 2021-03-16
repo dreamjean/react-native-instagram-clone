@@ -3,7 +3,10 @@ import React from "react";
 
 import PreferredContact from "../auth/PreferredContact";
 
-const tabs = [{ label: "Phone" }, { label: "Email" }];
+const tabs = [
+  { id: "phone", label: "Phone" },
+  { id: "email", label: "Email" },
+];
 
 const FormPreferredContact = ({ name, onNextPage }) => {
   const { setFieldValue, values } = useFormikContext();

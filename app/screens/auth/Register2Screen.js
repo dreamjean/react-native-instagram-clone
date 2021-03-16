@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Keyboard } from "react-native";
+import { Keyboard, Pressable } from "react-native";
 import styled from "styled-components";
 import * as Yup from "yup";
 
-import { AuthContainer } from "../../components";
-import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import { AuthContainer, Button } from "../../components";
+import { ErrorMessage, Form, FormCheckbox, FormField, SubmitButton } from "../../components/form";
+import { colors } from "../../config";
 import { db, firebase } from "../../firebase";
 import { Text } from "../../styles";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required().label("Username"),
+  fullName: Yup.string().required().label("Full name"),
   password: Yup.string()
     .required()
     .min(6)
@@ -17,10 +18,7 @@ const validationSchema = Yup.object().shape({
     .matches(/\w*[a-z]\w*/, "Password must have a small letter")
     .matches(/\d/, "Password must have a number")
     .label("Password"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords do not match")
-    .required()
-    .label("Confirm Password"),
+  savePassword: Yup.boolean(),
 });
 
 const Register2Screen = () => {
@@ -56,15 +54,15 @@ const Register2Screen = () => {
   return (
     <AuthContainer>
       <Header>
-        <Text title>Enter Confirmation Code</Text>
-        <Text body>Enter the confirmation code we sent to email.</Text>
-        <Text>Resend Code.</Text>
+        <Text title1 style={{ textTransform: "uppercase" }}>
+          Name and password
+        </Text>
       </Header>
       <Form
         initialValues={{
-          username: "",
+          fullName: "",
           password: "",
-          confirmPassword: "",
+          savePassword: false,
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
@@ -79,9 +77,9 @@ const Register2Screen = () => {
           iconName="user"
           keyboardAppearance="default"
           keyboardType="default"
-          name="username"
+          name="fullName"
           onSubmitEditing={() => focusNextField("password")}
-          placeholder="Username"
+          placeholder="Full name"
           returnKeyLabel="next"
           returnKeyType="next"
           textContentType="username"
@@ -97,7 +95,6 @@ const Register2Screen = () => {
           keyboardType="default"
           maxLength={50}
           name="password"
-          onSubmitEditing={() => focusNextField("confirmPassword")}
           onRef={(input) => (inputs["password"] = input)}
           placeholder="Password"
           returnKeyLabel="next"
@@ -105,26 +102,29 @@ const Register2Screen = () => {
           secureTextEntry
           textContentType="password"
         />
-        <FormField
-          allowFontScaling={false}
-          autoCapitalize="none"
-          autoCompleteType="password"
-          autoCorrect={false}
-          blurOnSubmit={false}
-          iconName="lock1"
-          keyboardAppearance="default"
-          keyboardType="default"
-          maxLength={50}
-          name="confirmPassword"
-          onRef={(input) => (inputs["confirmPassword"] = input)}
-          placeholder="Confirm Password"
-          returnKeyLabel="go"
-          returnKeyType="go"
-          secureTextEntry
-          textContentType="password"
-        />
-        <SubmitButton title="Next" />
+        <FormCheckbox name="savePassword" title="Remenber password" />
+        <SubmitButton title="Continue and Sync Contacts" />
       </Form>
+
+      <Button
+        title="Continue Without Syncing Contacts"
+        bgColor="transparent"
+        color={colors.blue}
+        onPress={() => true}
+        marginTop={8}
+      />
+      <Footer>
+        <Text small1 center color={colors.grey}>
+          Your contacts will be periodically synced and stored on Instagram servers to help you and
+          others find friends, and to help us provide a better service. To remove contacts, go to
+          Settings and disconnect.{" "}
+          <Pressable onPress={() => true}>
+            <Text button2 opacity={0.7} color={colors.dark}>
+              Learn More.
+            </Text>
+          </Pressable>
+        </Text>
+      </Footer>
     </AuthContainer>
   );
 };
@@ -133,7 +133,17 @@ const Header = styled.View`
   align-items: center;
 
   ${({ theme: { space } }) => ({
-    paddingTop: space.l2,
+    padding: space.m2,
+    paddingTop: space.l2 * 2,
+  })}
+`;
+
+const Footer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+
+  ${({ theme: { space } }) => ({
+    paddingBottom: space.m1,
   })}
 `;
 

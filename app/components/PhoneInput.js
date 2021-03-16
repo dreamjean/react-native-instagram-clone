@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { colors } from "../config";
 import { Input, Text, View } from "../styles";
 
-const PhoneInput = forwardRef(({ error, ...rest }, ref) => {
+const PhoneInput = forwardRef(({ error, touched, ...rest }, ref) => {
   const [countryCode, setCountryCode] = useState("TW");
   const [code, setCode] = useState("886");
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +29,7 @@ const PhoneInput = forwardRef(({ error, ...rest }, ref) => {
 
   return (
     <CountryModalProvider>
-      <View inputBox {...{ error }}>
+      <View inputBox {...{ error, touched }}>
         <Pressable onPress={() => setModalVisible(true)}>
           <CountryPicker
             onSelect={onSelect}

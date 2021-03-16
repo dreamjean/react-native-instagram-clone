@@ -5,9 +5,9 @@ import { Pressable } from "react-native";
 import { colors } from "../config";
 import { Input, View } from "../styles";
 
-const TextInput = forwardRef(({ error, icon, iconColor, onPress, ...rest }, ref) => {
+const TextInput = forwardRef(({ error, touched, icon, iconColor, onPress, ...rest }, ref) => {
   return (
-    <View inputBox {...{ error }}>
+    <View inputBox {...{ error, touched }}>
       <Input
         {...{ ref }}
         {...rest}

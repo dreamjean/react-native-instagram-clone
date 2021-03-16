@@ -18,6 +18,7 @@ const FormField = ({ name, onSubmitEditing, onRef, ...rest }) => {
     <>
       <TextInput
         error={errors[name]}
+        touched={touched[name]}
         value={values[name]}
         onBlur={() => setFieldTouched(name)}
         onChangeText={(text) => setFieldValue(name, text)}

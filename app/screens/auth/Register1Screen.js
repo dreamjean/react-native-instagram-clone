@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Keyboard } from "react-native";
+import { Keyboard, StyleSheet } from "react-native";
+import styled from "styled-components";
 import * as Yup from "yup";
 
-import { AuthContainer } from "../../components";
+import { AuthContainer, TextButton } from "../../components";
 import { ErrorMessage, Form, FormPreferredContact } from "../../components/form";
 import { db, firebase } from "../../firebase";
 
@@ -78,8 +79,23 @@ const Register1Screen = ({ navigation }) => {
         <ErrorMessage error={error} visible={error} />
         <FormPreferredContact name="showPhone" />
       </Form>
+      <Footer>
+        <TextButton
+          caption="Already have an account? "
+          title="Log in."
+          onPress={() => navigation.navigate("Login")}
+        />
+      </Footer>
     </AuthContainer>
   );
 };
+
+const Footer = styled.View`
+  ${({ theme: { colors, space } }) => ({
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.grey,
+    padding: space.s2,
+  })}
+`;
 
 export default Register1Screen;

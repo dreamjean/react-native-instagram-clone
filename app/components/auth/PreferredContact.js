@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -12,7 +12,9 @@ import styled from "styled-components";
 
 import { calender, images, theme } from "../../config";
 import { Image, Text } from "../../styles";
-import { FormField, FormPhoneField, SubmitButton } from "../form";
+import FormField from "../form/FormField";
+import FormPhoneField from "../form/FormPhoneField";
+import SubmitButton from "./../form/SubmitButton";
 
 const { width, TAB_WIDTH } = calender;
 const { colors, space } = theme;
@@ -30,7 +32,7 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
       <Tabs>
         {tabs.map((tab, index) => {
           const position = TAB_WIDTH * index + TAB_WIDTH / 2;
-          const stylet = useAnimatedStyle(() => {
+          const style = useAnimatedStyle(() => {
             const visibility = interpolate(
               indicatorPosition.value,
               [
@@ -58,7 +60,7 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
                   borderBottomWidth: 1,
                   borderBottomColor: colors.dark,
                 },
-                stylet,
+                style,
               ]}
             >
               <Pressable
@@ -110,9 +112,10 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
 };
 
 const Container = styled.View`
+  flex: 1;
+
   ${({ theme: { space } }) => ({
-    padding: space.m1,
-    marginTop: space.l2,
+    marginTop: space.l1 * 2,
   })}
 `;
 
@@ -120,10 +123,8 @@ const Tabs = styled.View`
   flex-direction: row;
   align-items: center;
 
-  ${({ theme: { colors, space } }) => ({
+  ${({ theme: { space } }) => ({
     margin: space.m1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.grey,
   })}
 `;
 
