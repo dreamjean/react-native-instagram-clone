@@ -5,6 +5,7 @@ import * as Yup from "yup";
 
 import Cake from "../../assets/svg/cake.svg";
 import { AuthContainer, Button } from "../../components";
+import DatePicker from "../../components/DatePicker";
 import { ErrorMessage, Form, SubmitButton } from "../../components/form";
 import { colors } from "../../config";
 // import { db, firebase } from "../../firebase";
@@ -82,18 +83,7 @@ const Register3Screen = () => {
         onPress={() => true}
         marginTop={8}
       />
-      <Footer>
-        {/* <Modal visible={true}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="date"
-            is24Hour={false}
-            display="default"
-            onChange={onChange}
-          />
-        </Modal> */}
-      </Footer>
+      <DatePicker />
     </AuthContainer>
   );
 };
@@ -104,15 +94,6 @@ const Header = styled.View`
   ${({ theme: { space } }) => ({
     padding: space.m2,
     paddingTop: space.l2 * 2,
-  })}
-`;
-
-const Footer = styled.View`
-  justify-content: flex-end;
-  height: 200px;
-
-  ${({ theme: { space } }) => ({
-    paddingBottom: space.m1,
   })}
 `;
 
