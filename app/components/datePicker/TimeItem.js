@@ -1,39 +1,29 @@
 import React from "react";
-import { TapGestureHandler } from "react-native-gesture-handler";
-import Animated, {
-  Extrapolate,
-  interpolate,
-  runOnJS,
-  useAnimatedStyle,
-} from "react-native-reanimated";
+import { Pressable } from "react-native";
+import Animated, { Extrapolate, interpolate, useAnimatedStyle } from "react-native-reanimated";
 
 import { calender } from "../../config";
 import { Text } from "../../styles";
 
 const { ROW_HEIGHT } = calender;
 
-const RowItem = ({ translateY, index, name, onPress }) => {
+const TimeItem = ({ translateY, index, label, onPress }) => {
   const style = useAnimatedStyle(() => {
     const opacity = interpolate(
       translateY.value,
       [-ROW_HEIGHT * (index + 1), -ROW_HEIGHT * index, -ROW_HEIGHT * (index - 1)],
-      [0.5, 1, 0.5],
+      [0.35, 1, 0.35],
       Extrapolate.CLAMP
     );
+
     return {
       transform: [{ translateY: translateY.value }],
       opacity,
     };
   });
 
-  const onGestureEvent = () => {
-    ({ absoluteX: x, absoluteY: y }) => {
-      runOnJS(onPress)({ x, y });
-    };
-  };
-
   return (
-    <TapGestureHandler {...{ onGestureEvent }}>
+    <Pressable {...{ onPress }}>
       <Animated.View
         style={[
           {
@@ -44,10 +34,10 @@ const RowItem = ({ translateY, index, name, onPress }) => {
           style,
         ]}
       >
-        <Text body>{name}</Text>
+        <Text body>{label}</Text>
       </Animated.View>
-    </TapGestureHandler>
+    </Pressable>
   );
 };
 
-export default RowItem;
+export default TimeItem;

@@ -1,12 +1,12 @@
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import { Keyboard } from "react-native";
 import styled from "styled-components";
 import * as Yup from "yup";
 
 import Cake from "../../assets/svg/cake.svg";
-import { AuthContainer, Button } from "../../components";
-import DatePicker from "../../components/DatePicker";
-import { ErrorMessage, Form, SubmitButton } from "../../components/form";
+import { AuthContainer } from "../../components";
+import { ErrorMessage, Form, FormDatePicker, SubmitButton } from "../../components/form";
 import { colors } from "../../config";
 // import { db, firebase } from "../../firebase";
 import { Text } from "../../styles";
@@ -21,6 +21,7 @@ const validationSchema = Yup.object().shape({
     .matches(/\d/, "Password must have a number")
     .label("Password"),
   savePassword: Yup.boolean(),
+  // birthday: Yup.date(),
 });
 
 const Register3Screen = () => {
@@ -67,23 +68,16 @@ const Register3Screen = () => {
           fullName: "",
           password: "",
           savePassword: false,
+          birthday: dayjs().format("YYYY-MM-DD"),
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <ErrorMessage error={error} visible={error} />
 
-        <SubmitButton title="Continue and Sync Contacts" />
+        <SubmitButton title="Next" />
+        <FormDatePicker name="birthday" />
       </Form>
-
-      <Button
-        title="Continue Without Syncing Contacts"
-        bgColor="transparent"
-        color={colors.blue}
-        onPress={() => true}
-        marginTop={8}
-      />
-      <DatePicker />
     </AuthContainer>
   );
 };

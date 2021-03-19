@@ -9,13 +9,12 @@ import { snapPoint } from "react-native-redash";
 import styled from "styled-components";
 
 import { calender } from "../../config";
-import RowItem from "./RowItem";
+import TimeItem from "./TimeItem";
 
-const { ROW_HEIGHT, DATE_MODAL_HEIGHT, DATE_PICKER_WIDTH } = calender;
+const { ROW_HEIGHT, DATE_MODAL_HEIGHT, TIME_WIDTH } = calender;
 
-const ItemSelection = ({ data, onPress }) => {
+const TimeSelection = ({ data, onSelectTime }) => {
   const translateY = useSharedValue(0);
-
   const snapPoints = data.map((_, i) => -i * ROW_HEIGHT);
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -42,15 +41,12 @@ const ItemSelection = ({ data, onPress }) => {
       >
         <Row>
           {data.map((item, index) => (
-            <RowItem
-              key={item}
+            <TimeItem
+              key={item.value}
               translateY={translateY}
               index={index}
-              name={item}
-              onPress={() => {
-                translateY.value = withSpring(-index * ROW_HEIGHT);
-                onPress();
-              }}
+              label={item.label}
+              onPress={() => onSelectTime(item)}
             />
           ))}
         </Row>
@@ -61,7 +57,7 @@ const ItemSelection = ({ data, onPress }) => {
 
 const Row = styled.View`
   height: ${ROW_HEIGHT}px;
-  width: ${DATE_PICKER_WIDTH}px;
+  width: ${TIME_WIDTH}px;
   border-top-width: 2px;
   border-bottom-width: 2px;
 
@@ -71,4 +67,4 @@ const Row = styled.View`
   })}
 `;
 
-export default ItemSelection;
+export default TimeSelection;
