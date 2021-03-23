@@ -7,35 +7,49 @@ import TimeSelection from "./TimeSelection";
 
 const { DATE_MODAL_HEIGHT } = calender;
 
-const start = 2000;
+// const start = 2000;
 
-const years = new Array(dayjs().year() - (start - 1))
-  .fill(0)
-  .map((_, i) => {
-    const value = start + i;
-    return { value, label: `${value}` };
-  })
-  .reverse();
+// const years = new Array(dayjs().year() - (start - 1))
+//   .fill(0)
+//   .map((_, i) => {
+//     const value = start + i;
+//     return { value, label: `${value}` };
+//   })
+//   .reverse();
 
-const months = Array.from({ length: 12 })
-  .fill(0)
-  .map((_, i) => {
-    return { value: i, label: `${dayjs().month(i).format("MMM")}` };
+const range = (start, end) => {
+  start = Number(start);
+  end = Number(end);
+
+  if (start > end) return [];
+
+  return new Array(end - start + 1)
+    .fill()
+    .map((_, index) => ({ value: index + start, label: `${index + start}` }));
+};
+
+const months = Array.from({ length: 12 }).map((_, i) => {
+  return { value: i, label: `${dayjs().month(i).format("MMM")}` };
+});
+
+const DatePicker = ({ year, month, date, onSelectDate, onSelectMonth, onSelectYear }) => {
+  const days = Array.from(Array(dayjs(year).daysInMonth()).keys()).map((_, i) => {
+    const value = i + 1;
+    return {
+      value,
+      label: `${dayjs().date(value).format("DD")}`,
+    };
   });
-
-const DatePicker = ({ values }) => {
-  const days = Array.from({ length: dayjs(values).daysInMonth() })
-    .fill(0)
-    .map((_, i) => {
-      const value = i + 1;
-      return { value, label: `${value}` };
-    });
 
   return (
     <Container>
-      <TimeSelection data={months} />
-      <TimeSelection data={days} />
-      <TimeSelection data={years} />
+      <TimeSelection data={months} initialValue={month} onSelectTime={onSelectMonth} />
+      <TimeSelection data={days} initialValue={date} onSelectTime={onSelectDate} />
+      <TimeSelection
+        data={range(1900, 2021).reverse()}
+        initialValue={year}
+        onSelectTime={onSelectYear}
+      />
     </Container>
   );
 };

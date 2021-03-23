@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import React, { useState } from "react";
 import { Keyboard } from "react-native";
 import styled from "styled-components";
@@ -21,12 +20,18 @@ const validationSchema = Yup.object().shape({
     .matches(/\d/, "Password must have a number")
     .label("Password"),
   savePassword: Yup.boolean(),
-  // birthday: Yup.date(),
+  birthday: Yup.object().shape({
+    date: Yup.number().min(1).max(31).required(),
+    month: Yup.string().min(0).max(11).required(),
+    year: Yup.number().min(1900).max(2021).required(),
+  }),
 });
 
 const Register3Screen = () => {
   const [error] = useState();
   // const [loading, setLoading] = useState(false);
+  // const { values } = useFormikContext();
+  // const { date, month, year } = values["birthday"];
 
   const handleSubmit = async () => {
     Keyboard.dismiss();
@@ -68,7 +73,7 @@ const Register3Screen = () => {
           fullName: "",
           password: "",
           savePassword: false,
-          birthday: dayjs().format("YYYY-MM-DD"),
+          birthday: { data: 1, month: 1, year: 2000 },
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
@@ -90,5 +95,10 @@ const Header = styled.View`
     paddingTop: space.l2 * 2,
   })}
 `;
+
+// const TextWrapper = styled.View`
+//   flex-direction: row;
+//   justify-content: space-between;
+// `;
 
 export default Register3Screen;

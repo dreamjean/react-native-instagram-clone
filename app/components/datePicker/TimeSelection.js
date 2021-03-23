@@ -13,8 +13,8 @@ import TimeItem from "./TimeItem";
 
 const { ROW_HEIGHT, DATE_MODAL_HEIGHT, TIME_WIDTH } = calender;
 
-const TimeSelection = ({ data, onSelectTime }) => {
-  const translateY = useSharedValue(0);
+const TimeSelection = ({ data = [], onSelectTime, initialValue }) => {
+  const translateY = useSharedValue(data.indexOf(initialValue) * ROW_HEIGHT);
   const snapPoints = data.map((_, i) => -i * ROW_HEIGHT);
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -46,7 +46,11 @@ const TimeSelection = ({ data, onSelectTime }) => {
               translateY={translateY}
               index={index}
               label={item.label}
-              onPress={() => onSelectTime(item)}
+              onPress={() => {
+                translateY.value = withSpring(index * ROW_HEIGHT);
+                if (onSelectTime) onSelectTime(data[index]);
+                console.log(data[index]);
+              }}
             />
           ))}
         </Row>

@@ -5,11 +5,23 @@ import DatePicker from "../datePicker/DatePicker";
 import ErrorMessage from "./ErrorMessage";
 
 const FormDatePicker = ({ name }) => {
-  const { setFieldValue, values, errors, touched } = useFormikContext();
+  const {
+    setFieldValue,
+    values: { date, month, year },
+    errors,
+    touched,
+  } = useFormikContext();
 
   return (
     <>
-      <DatePicker values={values[name]} onSelectYear={(item) => setFieldValue(name, item)} />
+      <DatePicker
+        date={date}
+        month={month}
+        year={year}
+        onSelectDate={(date) => setFieldValue(name, { date })}
+        onSelectMonth={(month) => setFieldValue(name, { month })}
+        onSelectYear={(year) => setFieldValue(name, { year })}
+      />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
