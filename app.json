@@ -18,13 +18,13 @@
     ],
     "extra": {
       "firebase": {
-        "apiKey": "AIzaSyBvePSgXpG-U7xiQaGHm1kELtzhBBA0HqA",
-        "authDomain": "instagram-ccd64.firebaseapp.com",
-        "databaseURL": "https://instagram-ccd64.firebaseio.com",
-        "projectId": "instagram-ccd64",
-        "storageBucket": "instagram-ccd64.appspot.com",
-        "messagingSenderId": "169771230242",
-        "appId": "1:169771230242:web:221edb6b94a2cd9255167b"
+        "apiKey": "AIzaSyBO21R9iq8Q3d0t3SMHemp4x9Tr0h5QQ6g",
+        "authDomain": "rn-instagram-3bc58.firebaseapp.com",
+        "databaseURL": "https://rn-instagram-3bc58.firebaseio.com",
+        "projectId": "rn-instagram-3bc58",
+        "storageBucket": "rn-instagram-3bc58.appspot.com",
+        "messagingSenderId": "875947779444",
+        "appId": "1:875947779444:web:89b71bae2e586c9b06b821"
       }
     },
     "ios": {

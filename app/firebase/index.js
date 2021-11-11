@@ -1,14 +1,21 @@
-import "firebase/auth";
-import "firebase/firestore";
-
 import Constants from "expo-constants";
-import * as firebase from "firebase";
+import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { initializeFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
-// firebase只能初始化一次
-if (!firebase.apps.length) {
-  firebase.initializeApp(Constants.manifest.extra.firebase);
-}
+export const app = initializeApp(Constants.manifest.extra.firebase);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
 
-const db = firebase.firestore();
-
-export { db, firebase };
+export default {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+};
