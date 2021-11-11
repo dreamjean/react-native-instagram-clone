@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { decode, encode } from "base-64";
 import AppLoading from "expo-app-loading";
-import React from "react";
 import { LogBox, Platform } from "react-native";
 
 import { Theme } from "./app/components";

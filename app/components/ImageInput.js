@@ -1,6 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Platform, Pressable } from "react-native";
 import styled from "styled-components";
 

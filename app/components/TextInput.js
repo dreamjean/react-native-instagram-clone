@@ -1,5 +1,5 @@
 import { FontAwesome5 } from "@expo/vector-icons";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { Pressable } from "react-native";
 
 import { colors } from "../config";

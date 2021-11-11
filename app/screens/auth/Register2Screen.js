@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Keyboard, Pressable } from "react-native";
 import styled from "styled-components";
 import * as Yup from "yup";
