@@ -72,7 +72,16 @@ const title1Style = css`
 `;
 
 const Text = styled.Text`
-  ${({ center, color, marginTop, margin, opacity, right, white, theme: { colors } }) => ({
+  ${({
+    center,
+    color,
+    marginTop,
+    margin,
+    opacity,
+    right,
+    white,
+    theme: { colors },
+  }) => ({
     color: color ? color : white ? colors.white : colors.dark,
     textAlign: center ? "center" : right ? "right" : "left",
     margin,

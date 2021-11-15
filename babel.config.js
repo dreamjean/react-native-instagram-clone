@@ -9,6 +9,9 @@ module.exports = function (api) {
         },
       ],
     ],
-    plugins: ["babel-plugin-styled-components", "react-native-reanimated/plugin"],
+    plugins: [
+      "babel-plugin-styled-components",
+      "react-native-reanimated/plugin",
+    ],
   };
 };

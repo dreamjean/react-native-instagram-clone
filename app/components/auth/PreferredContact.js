@@ -84,7 +84,8 @@ const PreferredContact = ({ tabs, onPress, showPhone }) => {
         <>
           <FormPhoneField name="phone" />
           <Text small2 center color={colors.grey} marginTop={12}>
-            You may receive SMS updates from Instagram and can optout at any time.
+            You may receive SMS updates from Instagram and can optout at any
+            time.
           </Text>
         </>
       )}

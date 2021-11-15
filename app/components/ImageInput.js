@@ -14,9 +14,11 @@ const ImageInput = ({ error, image, onChangeImage }) => {
 
   const requestPermission = async () => {
     if (Platform.OS !== "web") {
-      const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const { granted } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-      if (!granted) alert("You need to enable permission to access the library.");
+      if (!granted)
+        alert("You need to enable permission to access the library.");
     }
   };
 

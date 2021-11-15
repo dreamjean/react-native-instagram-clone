@@ -11,9 +11,14 @@ const loginWithGoogleAsync = async () => {
     });
 
     if (type === "success") {
-      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL); // 设置持久身份验证状态
+      await firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL); // 设置持久身份验证状态
 
-      const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+      const credential = firebase.auth.GoogleAuthProvider.credential(
+        idToken,
+        accessToken
+      );
 
       firebase
         .auth()

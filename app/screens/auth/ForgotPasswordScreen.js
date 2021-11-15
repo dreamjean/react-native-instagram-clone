@@ -16,7 +16,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
           Trouble logging in?
         </Text>
         <Text button1 color={colors.grey} center marginTop={12}>
-          Enter your username or the email or phone number linked to your account.
+          Enter your username or the email or phone number linked to your
+          account.
         </Text>
 
         <Button title="Send Login Link" onPress={() => true} />

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import { Keyboard } from "react-native";
 import styled from "styled-components";
@@ -5,7 +6,12 @@ import * as Yup from "yup";
 
 import Cake from "../../assets/svg/cake.svg";
 import { AuthContainer } from "../../components";
-import { ErrorMessage, Form, FormDatePicker, SubmitButton } from "../../components/form";
+import {
+  ErrorMessage,
+  Form,
+  FormDatePicker,
+  SubmitButton,
+} from "../../components/form";
 import { colors } from "../../config";
 // import { db, firebase } from "../../firebase";
 import { Text } from "../../styles";
@@ -65,7 +71,9 @@ const Register3Screen = () => {
         </Text>
         <Text small2 color={colors.grey} center marginTop={8}>
           {"This wont't be part of your public profile. "}
-          <Text color={colors.darkBlue}>Why do I need to provide my birthday.</Text>
+          <Text color={colors.darkBlue}>
+            Why do I need to provide my birthday.
+          </Text>
         </Text>
       </Header>
       <Form
@@ -73,7 +81,11 @@ const Register3Screen = () => {
           fullName: "",
           password: "",
           savePassword: false,
-          birthday: { data: 1, month: 1, year: 2000 },
+          birthday: {
+            date: dayjs().date(),
+            month: dayjs().month(),
+            year: dayjs().year(),
+          },
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}

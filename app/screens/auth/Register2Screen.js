@@ -4,7 +4,13 @@ import styled from "styled-components";
 import * as Yup from "yup";
 
 import { AuthContainer, Button } from "../../components";
-import { ErrorMessage, Form, FormCheckbox, FormField, SubmitButton } from "../../components/form";
+import {
+  ErrorMessage,
+  Form,
+  FormCheckbox,
+  FormField,
+  SubmitButton,
+} from "../../components/form";
 import { colors } from "../../config";
 import { db, firebase } from "../../firebase";
 import { Text } from "../../styles";
@@ -33,7 +39,9 @@ const Register2Screen = () => {
     // setLoading(true);
 
     try {
-      await firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(userInfo.email, userInfo.password);
 
       const { uid } = firebase.auth().currentUser;
 
@@ -115,9 +123,9 @@ const Register2Screen = () => {
       />
       <Footer>
         <Text small1 center color={colors.grey}>
-          Your contacts will be periodically synced and stored on Instagram servers to help you and
-          others find friends, and to help us provide a better service. To remove contacts, go to
-          Settings and disconnect.{" "}
+          Your contacts will be periodically synced and stored on Instagram
+          servers to help you and others find friends, and to help us provide a
+          better service. To remove contacts, go to Settings and disconnect.{" "}
           <Pressable onPress={() => true}>
             <Text button2 opacity={0.7} color={colors.dark}>
               Learn More.

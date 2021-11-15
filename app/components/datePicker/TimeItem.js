@@ -1,17 +1,25 @@
 import { Pressable } from "react-native";
-import Animated, { Extrapolate, interpolate, useAnimatedStyle } from "react-native-reanimated";
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 import { calender } from "../../config";
 import { Text } from "../../styles";
 
-const { ROW_HEIGHT } = calender;
+const { TIME_HEIGHT } = calender;
 
 const TimeItem = ({ translateY, index, label, onPress }) => {
   const style = useAnimatedStyle(() => {
     const opacity = interpolate(
       translateY.value,
-      [-ROW_HEIGHT * (index + 1), -ROW_HEIGHT * index, -ROW_HEIGHT * (index - 1)],
-      [0.35, 1, 0.35],
+      [
+        -TIME_HEIGHT * (index + 2),
+        -TIME_HEIGHT * index,
+        -TIME_HEIGHT * (index - 2),
+      ],
+      [0.3, 1, 0.3],
       Extrapolate.CLAMP
     );
 
@@ -26,7 +34,7 @@ const TimeItem = ({ translateY, index, label, onPress }) => {
       <Animated.View
         style={[
           {
-            height: ROW_HEIGHT,
+            height: TIME_HEIGHT,
             alignItems: "center",
             justifyContent: "center",
           },

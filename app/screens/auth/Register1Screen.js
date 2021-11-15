@@ -4,14 +4,21 @@ import styled from "styled-components";
 import * as Yup from "yup";
 
 import { AuthContainer, TextButton } from "../../components";
-import { ErrorMessage, Form, FormPreferredContact } from "../../components/form";
+import {
+  ErrorMessage,
+  Form,
+  FormPreferredContact,
+} from "../../components/form";
 import { db, firebase } from "../../firebase";
 
 const validationSchema = Yup.object().shape({
   showPhone: Yup.boolean(),
   phone: Yup.string().when("showPhone", {
     is: true,
-    then: Yup.string().min(6).required("Phone number is required.").label("Phone"),
+    then: Yup.string()
+      .min(6)
+      .required("Phone number is required.")
+      .label("Phone"),
   }),
   email: Yup.string()
     .email()
@@ -44,7 +51,9 @@ const Register1Screen = ({ navigation }) => {
     // setLoading(true);
 
     try {
-      await firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(userInfo.email, userInfo.password);
 
       const { uid } = firebase.auth().currentUser;
 

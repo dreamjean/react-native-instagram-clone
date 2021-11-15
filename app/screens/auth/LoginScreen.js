@@ -4,7 +4,12 @@ import styled from "styled-components";
 import * as Yup from "yup";
 
 import { AuthContainer, Footer, TextButton } from "../../components";
-import { ErrorMessage, Form, FormField, SubmitButton } from "../../components/form";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../../components/form";
 import { colors, images } from "../../config";
 import { firebase } from "../../firebase";
 import { Image } from "../../styles";

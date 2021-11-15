@@ -19,7 +19,14 @@ const Button = ({
 }) => {
   return (
     <Touchable {...{ bgColor, width, marginTop, onPress }} disable={loading}>
-      {logo && <Entypo style={{ marginRight: 8 }} name="facebook" size={24} color={color} />}
+      {logo && (
+        <Entypo
+          style={{ marginRight: 8 }}
+          name="facebook"
+          size={24}
+          color={color}
+        />
+      )}
       {loading ? (
         <Loading />
       ) : (

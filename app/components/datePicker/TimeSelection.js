@@ -1,5 +1,7 @@
+import { memo } from "react";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
+  runOnJS,
   useAnimatedGestureHandler,
   useSharedValue,
   withSpring,
@@ -10,11 +12,17 @@ import styled from "styled-components";
 import { calender } from "../../config";
 import TimeItem from "./TimeItem";
 
-const { ROW_HEIGHT, DATE_MODAL_HEIGHT, TIME_WIDTH } = calender;
+const { TIME_HEIGHT, DATE_MODAL_HEIGHT, TIME_WIDTH } = calender;
 
-const TimeSelection = ({ data = [], onSelectTime, initialValue }) => {
-  const translateY = useSharedValue(data.indexOf(initialValue) * ROW_HEIGHT);
-  const snapPoints = data.map((_, i) => -i * ROW_HEIGHT);
+const TimeSelection = ({ data = [], onSelectTime, name, initialValue }) => {
+  const translateY = useSharedValue(data.findIndex({ value: initialValue }));
+  const snapPoints = data.map((_, i) => -i * TIME_HEIGHT);
+
+  const handleSelectTime = () => {
+    const index = Math.abs(translateY.value) / TIME_HEIGHT;
+    if (name === "year") onSelectTime({ [name]: data[index].value });
+    else onSelectTime({ [name]: data[index].value - 1 });
+  };
 
   const onGestureEvent = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
@@ -25,7 +33,13 @@ const TimeSelection = ({ data = [], onSelectTime, initialValue }) => {
     },
     onEnd: ({ velocityY }) => {
       const dest = snapPoint(translateY.value, velocityY, snapPoints);
-      translateY.value = withSpring(dest);
+      translateY.value = withSpring(
+        dest,
+        {
+          velocity: velocityY,
+        },
+        runOnJS(handleSelectTime)()
+      );
     },
   });
 
@@ -46,9 +60,12 @@ const TimeSelection = ({ data = [], onSelectTime, initialValue }) => {
               index={index}
               label={item.label}
               onPress={() => {
-                translateY.value = withSpring(index * ROW_HEIGHT);
-                if (onSelectTime) onSelectTime(data[index]);
-                console.log(data[index]);
+                translateY.value = withSpring(-index * TIME_HEIGHT);
+                if (onSelectTime) {
+                  if (name === "year")
+                    onSelectTime({ [name]: data[index].value });
+                  else onSelectTime({ [name]: data[index].value - 1 });
+                }
               }}
             />
           ))}
@@ -59,7 +76,7 @@ const TimeSelection = ({ data = [], onSelectTime, initialValue }) => {
 };
 
 const Row = styled.View`
-  height: ${ROW_HEIGHT}px;
+  height: ${TIME_HEIGHT}px;
   width: ${TIME_WIDTH}px;
   border-top-width: 2px;
   border-bottom-width: 2px;
@@ -70,4 +87,4 @@ const Row = styled.View`
   })}
 `;
 
-export default TimeSelection;
+export default memo(TimeSelection);

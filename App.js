@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { decode, encode } from "base-64";
 import AppLoading from "expo-app-loading";
