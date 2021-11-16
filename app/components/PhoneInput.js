@@ -4,7 +4,7 @@ import CountryPicker, {
   CountryModalProvider,
   DEFAULT_THEME,
 } from "react-native-country-picker-modal";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { colors } from "../config";
 import { Input, Text, View } from "../styles";

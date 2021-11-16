@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect } from "react";
 import { Platform, Pressable } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { colors } from "../config";
 import { Image } from "../styles";

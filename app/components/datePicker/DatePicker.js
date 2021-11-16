@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { calender } from "../../config";
 import TimeSelection from "./TimeSelection";
@@ -40,7 +40,7 @@ const days = Array.from({ length: 31 })
     const value = i + 1;
     return {
       value,
-      label: `${dayjs().date(value).format("DD")}`,
+      label: `${dayjs("2021-01-01").date(value).format("DD")}`,
     };
   });
 
@@ -52,42 +52,51 @@ const DatePicker = ({
   onSelectMonth,
   onSelectYear,
 }) => {
-  const [dates, setDates] = useState(days);
-
+  const [dates, setDates] = useState([]);
+  // console.log(days);
   useEffect(() => {
     restoreDates(year, month, date);
-  }, [dates]);
+  }, [dates, restoreDates]);
 
   const restoreDates = (year, month, date) => {
     let dates = [...days];
     const currentDate = `${year}-${month}-${date}`;
     const currentDateLength = dayjs(currentDate).daysInMonth();
-    if (currentDateLength < days.lenth) {
+    if (currentDateLength < days.length) {
       dates = dates.slice(0, currentDateLength - 1);
-      setDates(dates);
     }
+    setDates(dates);
   };
+
+  const timeSelections = [
+    {
+      data: months,
+      name: "month",
+      initialTime: month,
+      onSelectTime: onSelectMonth,
+    },
+    {
+      data: dates,
+      name: "date",
+      initialTime: date,
+      onSelectTime: onSelectDate,
+    },
+    {
+      data: years,
+      name: "year",
+      initialTime: year,
+      onSelectTime: onSelectYear,
+    },
+  ];
 
   return (
     <Container>
-      <TimeSelection
-        data={months}
-        name="month"
-        initialValue={month}
-        onSelectTime={onSelectMonth}
-      />
-      <TimeSelection
-        data={dates}
-        name="date"
-        initialValue={date}
-        onSelectTime={onSelectDate}
-      />
-      <TimeSelection
-        data={years}
-        name="year"
-        initialValue={year}
-        onSelectTime={onSelectYear}
-      />
+      {timeSelections.map(({ data, name, initialTime, onSelectTime }) => (
+        <TimeSelection
+          key={name}
+          {...{ data, name, initialTime, onSelectTime }}
+        />
+      ))}
     </Container>
   );
 };

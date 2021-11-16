@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Keyboard, Pressable } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import * as Yup from "yup";
 
 import { AuthContainer, Button } from "../../components";

@@ -7,7 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { calender, images, theme } from "../../config";
 import { Image, Text } from "../../styles";

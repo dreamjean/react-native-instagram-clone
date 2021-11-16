@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 const Icon = ({
   backgroundColor,

@@ -1,27 +1,28 @@
-import { memo } from "react";
 import { PanGestureHandler } from "react-native-gesture-handler";
-import Animated, {
+import {
   runOnJS,
   useAnimatedGestureHandler,
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
 import { snapPoint } from "react-native-redash";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { calender } from "../../config";
 import TimeItem from "./TimeItem";
 
 const { TIME_HEIGHT, DATE_MODAL_HEIGHT, TIME_WIDTH } = calender;
 
-const TimeSelection = ({ data = [], onSelectTime, name, initialValue }) => {
-  const translateY = useSharedValue(data.findIndex({ value: initialValue }));
+const TimeSelection = ({ data = [], onSelectTime, name, initialTime }) => {
+  const translateY = useSharedValue(
+    data.findIndex(({ value }) => value === initialTime) * -TIME_HEIGHT
+  );
   const snapPoints = data.map((_, i) => -i * TIME_HEIGHT);
 
   const handleSelectTime = () => {
-    const index = Math.abs(translateY.value) / TIME_HEIGHT;
-    if (name === "year") onSelectTime({ [name]: data[index].value });
-    else onSelectTime({ [name]: data[index].value - 1 });
+    const index = Math.abs(translateY.value / TIME_HEIGHT);
+    const { value } = data[index];
+    onSelectTime({ [name]: value });
   };
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -36,7 +37,9 @@ const TimeSelection = ({ data = [], onSelectTime, name, initialValue }) => {
       translateY.value = withSpring(
         dest,
         {
-          velocity: velocityY,
+          overshootClamping: true,
+          restDisplacementThreshold: 1,
+          restSpeedThreshold: 1,
         },
         runOnJS(handleSelectTime)()
       );
@@ -45,13 +48,7 @@ const TimeSelection = ({ data = [], onSelectTime, name, initialValue }) => {
 
   return (
     <PanGestureHandler onGestureEvent={onGestureEvent}>
-      <Animated.View
-        style={{
-          height: DATE_MODAL_HEIGHT,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Container>
         <Row>
           {data.map((item, index) => (
             <TimeItem
@@ -61,19 +58,22 @@ const TimeSelection = ({ data = [], onSelectTime, name, initialValue }) => {
               label={item.label}
               onPress={() => {
                 translateY.value = withSpring(-index * TIME_HEIGHT);
-                if (onSelectTime) {
-                  if (name === "year")
-                    onSelectTime({ [name]: data[index].value });
-                  else onSelectTime({ [name]: data[index].value - 1 });
-                }
+                const { value } = data[index];
+                if (onSelectTime) onSelectTime({ [name]: value });
               }}
             />
           ))}
         </Row>
-      </Animated.View>
+      </Container>
     </PanGestureHandler>
   );
 };
+
+const Container = styled.View`
+  height: ${DATE_MODAL_HEIGHT}px;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Row = styled.View`
   height: ${TIME_HEIGHT}px;
@@ -87,4 +87,4 @@ const Row = styled.View`
   })}
 `;
 
-export default memo(TimeSelection);
+export default TimeSelection;

@@ -15,15 +15,18 @@ const TimeItem = ({ translateY, index, label, onPress }) => {
     const opacity = interpolate(
       translateY.value,
       [
-        -TIME_HEIGHT * (index + 2),
+        -TIME_HEIGHT * (index + 1),
         -TIME_HEIGHT * index,
-        -TIME_HEIGHT * (index - 2),
+        -TIME_HEIGHT * (index - 1),
       ],
-      [0.3, 1, 0.3],
+      [0.35, 1, 0.35],
       Extrapolate.CLAMP
     );
 
     return {
+      height: TIME_HEIGHT,
+      alignItems: "center",
+      justifyContent: "center",
       transform: [{ translateY: translateY.value }],
       opacity,
     };
@@ -31,16 +34,7 @@ const TimeItem = ({ translateY, index, label, onPress }) => {
 
   return (
     <Pressable {...{ onPress }}>
-      <Animated.View
-        style={[
-          {
-            height: TIME_HEIGHT,
-            alignItems: "center",
-            justifyContent: "center",
-          },
-          style,
-        ]}
-      >
+      <Animated.View style={style}>
         <Text body>{label}</Text>
       </Animated.View>
     </Pressable>

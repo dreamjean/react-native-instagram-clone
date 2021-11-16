@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { Button, Footer } from "../../components";
 import { colors } from "../../config";

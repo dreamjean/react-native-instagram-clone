@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get("window");
 
 const TIME_HEIGHT = height / 16;
 const TAB_WIDTH = (width - theme.space.m1 * 2) / 2;
-const VISIBLE_TIMES = 5;
+const VISIBLE_TIMES = 3;
 const DATE_MODAL_HEIGHT = TIME_HEIGHT * VISIBLE_TIMES + theme.space.s3 * 2;
 const TIME_WIDTH = width / 5;
 

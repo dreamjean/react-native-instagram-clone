@@ -64,7 +64,7 @@
     "react-native-svg-transformer": "^0.14.3"
   },
   "resolutions": {
-    "styled-components": "^5.2.1"
+    "styled-components": "^5"
   },
   "private": true
 }

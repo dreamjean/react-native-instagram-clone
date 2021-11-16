@@ -1,6 +1,6 @@
 import { Entypo } from "@expo/vector-icons";
 import { RectButton } from "react-native-gesture-handler";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { calender, colors } from "../config";
 import { Text } from "../styles";

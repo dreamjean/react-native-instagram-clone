@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import { Keyboard } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import * as Yup from "yup";
 
 import Cake from "../../assets/svg/cake.svg";

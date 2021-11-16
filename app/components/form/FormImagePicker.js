@@ -1,5 +1,5 @@
 import { useFormikContext } from "formik";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import ImageInput from "../ImageInput";
 import ErrorMessage from "./ErrorMessage";
